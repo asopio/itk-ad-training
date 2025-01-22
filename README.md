@@ -13,3 +13,8 @@ Training can be configured using config files. The base config can be found in `
 ```
 python cli.py fit --config <config name>
 ```
+
+To log training information using Comet, create and account on https://www.comet.com, obtain an API key, and set the following environment variable
+```
+export COMET_API_KEY="YOUR-API-KEY"
+```
