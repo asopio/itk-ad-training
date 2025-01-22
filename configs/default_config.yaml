@@ -1,0 +1,50 @@
+seed_everything: 42
+trainer:
+  accelerator: gpu
+  devices: 1
+  max_epochs: 10
+  log_every_n_steps: 2
+  logger:
+    class_path: lightning.pytorch.loggers.CometLogger
+    init_args:
+      project_name: defect_detection
+      save_dir: 'lightning_logs'
+      workspace: asopio
+  # callbacks:
+    # - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      # init_args:
+        # monitor: train_loss
+        # mode: min
+        # save_top_k: 1
+        # filename: best-{epoch:02d}-{val_loss:.2f}
+  #   - class_path: pytorch_lightning.callbacks.EarlyStopping
+  #     init_args:
+  #       monitor: val_loss
+  #       patience: 10
+  #       mode: min
+
+model:
+  name: deepAE
+  model_cfg_path: AE_model
+  # class_path: defect_detection.AE_cls
+  # init_args:
+    # learning_rate: 0.001
+    # Add other model-specific arguments
+    # p: 
+    #   block_size_in: 1
+    #   block_ker: 1
+    #   drop: 1
+    #   block_size_out: 1
+    #   out_pad: 1
+    #   latent_size: 1
+    #   latent_ker: 1
+    #   latent_opad: 1
+    # apply_only: False
+    # loss_fn: MSELoss
+    # opt: None
+    # opt_param: None
+
+data:
+  train_data_dir: 'train_images'
+  val_data_dir: 'val_images'
+  test_data_dir: 'test_images'
