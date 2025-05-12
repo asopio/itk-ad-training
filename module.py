@@ -1,4 +1,4 @@
-from defect_detection import AE_cls, deepAE_load
+from defect_detection import AE_cls, deepAE_load, get_pixels, emap_mean
 import lightning as L
 import torch
 from torchvision.utils import save_image
@@ -42,6 +42,13 @@ class ModelWrapper(L.LightningModule):
                 imgname = f"images/val_{io}_sample.png"
                 save_image(xb[0], imgname)
                 self.logger.experiment.log_image(imgname)
+
+        emap = emap_mean(x_hat, x)
+        get_pixels(emap, th, dbs_param, pix_th)
+
+
+        ### TODO: perform DBSCAN filtering step (get_pixels from defect_detection/filtering.py)
+        ### TODO: evaluate some metrics bsed on the filtered image pixels 
 
         return loss
 
